@@ -14,11 +14,11 @@ def timer():
     
  
 def start():
-    start = input("")                   #having no characters as an input ensures that user can just press space.
+    start = input("")                   #having no characters as an input ensures that user can just press enter.
     if (start == "" or start == " "):   
         timer()
     else:
-        print("Please press space to start.")       #gives a little bit for interactivity to the user, allowing them to choose when to start.
+        print("Please press space to start.")       #gives a little bit for interactivity to the user, allowing them to choose when to start. 
         start()   
 
 def breakCalc():
@@ -74,7 +74,7 @@ def setup():
     timeTotal = studyTimeMinutes  + (studyTimeHours * 60)   #Adds the total time studied in minutes
     
     
-    print("Okay! You want to study for ", studyTimeHours, plural, ",", studyTimeMinutes, plural2, ", and" studyTimeSeconds, plural3, "right?")
+    print("Okay! You want to study for ", studyTimeHours, plural, ",", studyTimeMinutes, plural2, ", and", studyTimeSeconds, plural3, "right?")
     confirmation = input("Yes or No? ").lower()#asks for user confirmation, in case they messed up a step. ensures input is not case sensitive
     if confirmation in ["yes", "y"]:             
         breakCalc()                            #calls the function which calculates how many breaks user will get
@@ -82,5 +82,5 @@ def setup():
         print("Alright then, let's do this again.")
         setup()                                #calls back to the start of this function, in case user wants to start over.
  
-setup()
+setup()                                         #starts the code
 
