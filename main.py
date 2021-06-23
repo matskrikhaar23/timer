@@ -55,6 +55,11 @@ def setup():
         remainder = (studyTimeMinutes % 60)
         studyTimeHours = (studyTimeHours + hours)
         studyTimeMinutes = 0 + remainder
+        if (studyTimeHours == 1):
+            plural = "hour"              #checks for proper grammar
+        else:
+            plural = "hours"             #checks for proper grammar
+    
 
     print(studyTimeMinutes, plural2, "? Alright! And how many seconds?") #asks for how many seconds to stud
     studyTimeSeconds = int(input("Seconds: "))
@@ -69,6 +74,10 @@ def setup():
         remainder = (studyTimeSeconds % 60)
         studyTimeMinutes = (studyTimeMinutes + minutes)
         studyTimeSeconds = 0 + remainder
+        if (studyTimeMinutes == 1):
+            plural2 = "minute"              #checks for proper grammar
+        else:
+            plural2 = "minutes"             #checks for proper grammar
     
     global timeTotal                    #for some reason my code only works if this is called here. Sorry!
     timeTotal = studyTimeMinutes  + (studyTimeHours * 60)   #Adds the total time studied in minutes
