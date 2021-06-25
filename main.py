@@ -1,24 +1,26 @@
-#study pomodoro
-#get input as to how long user needs to study
-#based on that numeric value
-#convert hours, minutes, seconds
-#Compute how many breaks, and how long they will study
 import time
 
 
+print('Hello and welcome to the Study Pomodoro Timer! How long are you studying for?')  #This is placed out here so the welcome message is not reused upon restarting
 
 def timer():
-    print("test")
-    #timer will go here once we learn how to use libaries
+    print(timeTotal)
+    print(testValue)
+    while (studyTimeSeconds != 0 and studyTimeMinutes != 0 and studyTimeHours != 0):
+        print(studyTimeSeconds, ":", studyTimeMinutes, ":", studyTimeHours)
+        studyTimeSeconds = secostudyTimeSeconds - 1
+        time.sleep(1)
+        
+        if (studyTimeSeconds == 0):
+            studyTimeSeconds = 59
+            time.sleep(1)
     
-    
- 
 def start():
     start = input("")                   #having no characters as an input ensures that user can just press enter.
     if (start == "" or start == " "):   
         timer()
     else:
-        print("Please press space to start.")       #gives a little bit for interactivity to the user, allowing them to choose when to start. 
+        print("Please press enter to start.")       #gives a little bit for interactivity to the user, allowing them to choose when to start. 
         start()   
 
 def breakCalc():
@@ -36,14 +38,17 @@ def breakCalc():
         start()                                #calls the function that starts the timer
 
 def setup():
-    print('Hello and welcome to the Study Pomodoro Timer! How long are you studying for?')
+    global studyTimeHours
     studyTimeHours = int(input("Hours: ")) #asks user for how many hours they want to study for.
+    hours = studyTimeHours
     if (studyTimeHours == 1):
         plural = 'hour'                     #checks for proper grammar
     else:
         plural = 'hours'                    #checks for proper grammar
 
     print(studyTimeHours, plural, 'huh? And how many minutes?') #asks user for how many minutes to study
+    
+    global studyTimeMinutes
     studyTimeMinutes = int(input('Minutes: '))
     if (studyTimeMinutes == 1):
      plural2 = 'minute'                         #checks for proper grammar
@@ -62,11 +67,13 @@ def setup():
     
 
     print(studyTimeMinutes, plural2, "? Alright! And how many seconds?") #asks for how many seconds to stud
+    global studyTimeSeconds
     studyTimeSeconds = int(input("Seconds: "))
     if (studyTimeSeconds == 1):
         plural3 = "second"              #checks for proper grammar
     else:
         plural3 = "seconds"             #checks for proper grammar
+              
     
     
     if (studyTimeSeconds >= 60):            #if the amount of seconds is over 60, it adds one minute
@@ -81,15 +88,20 @@ def setup():
     
     global timeTotal                    #for some reason my code only works if this is called here. Sorry!
     timeTotal = studyTimeMinutes  + (studyTimeHours * 60)   #Adds the total time studied in minutes
-    
+    global testValue
+    testValue = int(input("test:"))
     
     print("Okay! You want to study for ", studyTimeHours, plural, ",", studyTimeMinutes, plural2, ", and", studyTimeSeconds, plural3, "right?")
     confirmation = input("Yes or No? ").lower()#asks for user confirmation, in case they messed up a step. ensures input is not case sensitive
-    if confirmation in ["yes", "y"]:             
-        breakCalc()                            #calls the function which calculates how many breaks user will get
+    if confirmation in ["yes", "y"]:          
+        breakCalc()                          #calls the function which calculates how many breaks user will get
     elif confirmation in ["no", "n"]:
-        print("Alright then, let's do this again.")
+        print("Alright then, let's do this again. How many hours would you like to study for?")
         setup()                                #calls back to the start of this function, in case user wants to start over.
- 
+
+
 setup()                                         #starts the code
 
+
+
+    
