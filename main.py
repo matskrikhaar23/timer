@@ -6,11 +6,6 @@ timerBool = False
 print('Hello and welcome to the Study Pomodoro Timer! How long are you studying for?')  #This is placed out here so the welcome message is not reused upon restarting
 
 def timer():
-    global test
-    test = 0
-    
-    
-
     longBreaksHad = 0
     
     def stop():
@@ -43,13 +38,13 @@ def timer():
                         minutes = 59
                         hours = hours - 1
                 
-    
     def longBreak():
         timerBool = True
         global longBreaksHad
         seconds = 0
         minutes = 15
         hours = 0
+
         while (timerBool == True):
             if (seconds == 0):
                 print("Break Time:", hours, ":", minutes, ":", seconds)
@@ -82,9 +77,7 @@ def timer():
         minutes = 5
         hours = 0
         timerBool = True
-        
         global breaksHad
-        
 
         while (timerBool == True):
             if (seconds == 0):
@@ -119,8 +112,6 @@ def timer():
         timerBool = True
         
         while(timerBool == True):
-            
-                
             if (seconds == 0):
                     if (minutes == 0):
                         if (hours == 0):
@@ -128,8 +119,6 @@ def timer():
                             print("Time's up! Great job!")
                             break
                             timerBool == False 
-                            test == 1
-
                     elif (seconds == 0 and minutes !=0):
                         print("Study Time:", hours, ":", minutes, ":", seconds)
                         time.sleep(1)
@@ -144,8 +133,7 @@ def timer():
                 time.sleep(1)
                 minutes = 59
                 hours = hours - 1
-                
-                
+                            
     def twentyFiveMinTimer():
         global studyHad
         global seconds
@@ -192,7 +180,7 @@ def timer():
                     minutes = 59
                     hours = hours - 1  
 
-    if (breakAmt == 0 and test == 0):
+    if (breakAmt == 0):
         setMinTimer()
     elif (breakAmt < 4 and breakAmt != 0):
         twentyFiveMinTimer()
