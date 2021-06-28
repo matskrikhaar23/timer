@@ -1,20 +1,203 @@
 import time
-
+longBreaksHad = 0
+breaksHad = 0
+timerBool = False
 
 print('Hello and welcome to the Study Pomodoro Timer! How long are you studying for?')  #This is placed out here so the welcome message is not reused upon restarting
 
 def timer():
-    print(timeTotal)
-    print(testValue)
-    while (studyTimeSeconds != 0 and studyTimeMinutes != 0 and studyTimeHours != 0):
-        print(studyTimeSeconds, ":", studyTimeMinutes, ":", studyTimeHours)
-        studyTimeSeconds = secostudyTimeSeconds - 1
-        time.sleep(1)
-        
-        if (studyTimeSeconds == 0):
-            studyTimeSeconds = 59
-            time.sleep(1)
+    global test
+    test = 0
     
+    
+
+    longBreaksHad = 0
+    
+    def stop():
+        timerBool = False
+        print("The timer is over! Good Job!")
+
+    def timeRemaining():
+        global minutes
+        minutes == (timeTotal - (5 * breaksHad) - (25 * studyHad ) - (15 * longBreaksHad))
+        seconds = studyTimeSeconds
+        timerBool = True
+        while (timerBool == True):
+            if (seconds == 0):
+                print("Study Time:", hours, ":", minutes, ":", seconds)
+                time.sleep(1)
+                seconds = 59
+                minutes = minutes - 1   
+            else:
+                print("Study Time:", hours, ":", minutes, ":", seconds)
+                seconds -= 1
+                time.sleep(1)
+
+            if (seconds) == 0:
+                if (minutes == 0):
+                    if (hours == 0):
+                        timerBool == False
+                    else:
+                        print(hours, ":", minutes, ":", seconds)
+                        time.sleep(1)
+                        minutes = 59
+                        hours = hours - 1
+                
+    
+    def longBreak():
+        timerBool = True
+        global longBreaksHad
+        seconds = 0
+        minutes = 15
+        hours = 0
+        while (timerBool == True):
+            if (seconds == 0):
+                print("Break Time:", hours, ":", minutes, ":", seconds)
+                time.sleep(1)
+                seconds = 59
+                minutes = minutes - 1   
+            else:
+                print("Break Time:", hours, ":", minutes, ":", seconds)
+                seconds -= 1
+                time.sleep(1)
+
+            if (minutes == 0):
+                if (seconds == 0):
+                    if (hours == 0):
+                        timerBool = False
+                        breaksHad = breaksHad + 1
+
+                        if (breaksHad == breakAmt):
+                            timeRemaining()
+                        else:
+                            twentyFiveMinTimer()
+                    
+                    print("Break Time:", hours, ":", minutes, ":", seconds)
+                    time.sleep(1)
+                    minutes = 59
+                    hours = hours - 1
+        
+    def shortBreak():
+        seconds = 0
+        minutes = 5
+        hours = 0
+        timerBool = True
+        
+        global breaksHad
+        
+
+        while (timerBool == True):
+            if (seconds == 0):
+                print("Break Time:", hours, ":", minutes, ":", seconds)
+                time.sleep(1)
+                seconds = 59
+                minutes = minutes - 1   
+            else:
+                print("Break Time:", hours, ":", minutes, ":", seconds)
+                seconds -= 1
+                time.sleep(1)
+
+            if (minutes == 0):
+                if (seconds == 0):
+                    if (hours == 0):
+                        timerBool = False
+                        breaksHad = breaksHad + 1
+
+                        if (breaksHad == breakAmt):
+                            timeRemaining()
+                        else:
+                            twentyFiveMinTimer()
+                    print("Break Time:", hours, ":", minutes, ":", seconds)
+                    time.sleep(1)
+                    minutes = 59
+                    hours = hours - 1  
+    
+    def setMinTimer():
+        seconds = studyTimeSeconds
+        minutes = studyTimeMinutes
+        hours = studyTimeHours
+        timerBool = True
+        
+        while(timerBool == True):
+            
+                
+            if (seconds == 0):
+                    if (minutes == 0):
+                        if (hours == 0):
+                            seconds = seconds - 1
+                            print("Time's up! Great job!")
+                            break
+                            timerBool == False 
+                            test == 1
+
+                    elif (seconds == 0 and minutes !=0):
+                        print("Study Time:", hours, ":", minutes, ":", seconds)
+                        time.sleep(1)
+                        seconds = 59
+                        minutes = minutes - 1   
+            elif (seconds != 0):
+                print("Study Time:", hours, ":", minutes, ":", seconds)
+                seconds -= 1
+                time.sleep(1)
+            elif(hours != 0):
+                print(hours, ":", minutes, ":", seconds)
+                time.sleep(1)
+                minutes = 59
+                hours = hours - 1
+                
+                
+    def twentyFiveMinTimer():
+        global studyHad
+        global seconds
+        global minutes
+        global hours
+        timerBool = True
+        seconds = 0
+        minutes = 25
+        hours = 0
+        studyHad = 0
+        while (timerBool == True):
+            if (seconds == 0):
+                print("Study Time:", hours, ":", minutes, ":", seconds)
+                time.sleep(1)
+                seconds = 59
+                minutes = minutes - 1   
+            else:
+                print("Study Time:", hours, ":", minutes, ":", seconds)
+                seconds -= 1
+                time.sleep(1)
+
+            if (minutes == 0):
+                if (seconds == 0):
+                    if (hours == 0):
+                        studyHad += 1
+                        timerBool = False
+                        if (breaksHad > 0):
+                            if (breaksHad % 4 == 0):
+                                seconds = 0
+                                minutes = 15
+                                hours = 0
+                                longBreak()
+                            elif (breaksHad == breakAmt):
+                                timeRemaining()
+                        else:
+                            seconds = 0
+                            minutes = 5
+                            hours = 0
+                            shortBreak()
+                    
+                        
+                    print(hours, ":", minutes, ":", seconds)
+                    time.sleep(1)
+                    minutes = 59
+                    hours = hours - 1  
+
+    if (breakAmt == 0 and test == 0):
+        setMinTimer()
+    elif (breakAmt < 4 and breakAmt != 0):
+        twentyFiveMinTimer()
+
+                   
 def start():
     start = input("")                   #having no characters as an input ensures that user can just press enter.
     if (start == "" or start == " "):   
@@ -25,6 +208,7 @@ def start():
 
 def breakCalc():
     #print(timeTotal)
+    global breakAmt
     breakAmt = int(timeTotal / 30)              #calculates the amount of total breaks
     longBreakAmt = int(breakAmt / 4)            #calculates the amount of long breaks
     #print(breakAmt)
@@ -85,11 +269,11 @@ def setup():
             plural2 = "minute"              #checks for proper grammar
         else:
             plural2 = "minutes"             #checks for proper grammar
-    
-    global timeTotal                    #for some reason my code only works if this is called here. Sorry!
+
+            
+    global timeTotal        #for some reason my code only works if this is called here. Sorry!
     timeTotal = studyTimeMinutes  + (studyTimeHours * 60)   #Adds the total time studied in minutes
-    global testValue
-    testValue = int(input("test:"))
+    
     
     print("Okay! You want to study for ", studyTimeHours, plural, ",", studyTimeMinutes, plural2, ", and", studyTimeSeconds, plural3, "right?")
     confirmation = input("Yes or No? ").lower()#asks for user confirmation, in case they messed up a step. ensures input is not case sensitive
@@ -99,9 +283,7 @@ def setup():
         print("Alright then, let's do this again. How many hours would you like to study for?")
         setup()                                #calls back to the start of this function, in case user wants to start over.
 
-
 setup()                                         #starts the code
 
 
 
-    
